@@ -1,0 +1,2 @@
+language = "undefined"
+run="clang++-7 -pthread -std=c++17 -o Week5/array1 Week5/array1.cpp;./Week5/array1" 
