@@ -18,6 +18,17 @@ int main()
 
 void sortNumbers(double *ptr, int N)
 {
+  for(int i = 0; i < N-1; i++){
+      for(int j = i+1; j < N; j++){
+          int temp;
+          if(*(ptr+i) > *(ptr+j))
+          {
+              temp = *(ptr+i);
+              *(ptr+i) = *(ptr+j);
+              *(ptr+j) = temp;
+          }
+      }
+  }
 
 }
 
