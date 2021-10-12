@@ -4,11 +4,11 @@
 #include <iomanip>
 using namespace std;
 
-const int 	MAX_LEN = 20;
+const int 	LEN_NAME = 20;
 const int 	NUM_SCORES = 3;
 struct Students {
 	int 	sid;
-	char 	sname[MAX_LEN];
+	char 	sname[LEN_NAME];
 	double 	scores[NUM_SCORES];
 	double  total_score;
 };
