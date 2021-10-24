@@ -1,122 +1,53 @@
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include    <iostream>
+#include 	<cstdlib>
+#include 	<ctime>
 using namespace std;
 
-int binarySearch(int array[], int, int);
-int linearSearch(int [], int, int);
-void makeArray(int array[], int);
-void bubbleSort(int array[], int);
-void printArray(int array[], int);
-int compareBinarySearch(int [], int, int);
-int compareLinearSearch(int [], int, int);
-
+void    makeArray(int array[], int N);
+void    printArray(int array[], int N);
+void    bubbleSort(int array[], int N);
+int     binarySearch(int [], int, int);
+int     linearSearch(int [], int, int);
 
 int main()
 {
-    const int N = 1024; 
-    const int TRIES = 10;
-    int array[N];
-    int target, foundindex;
-    int compNumber;
+    const int N = 64; 
+	const int TRIES = 100;
+    int array[N]; 
+    int    target, foundindex;
+	int 	total_linear = 0 , total_binary = 0;
+	
 
-    srand(time(0));
-    makeArray(array, N);
-    bubbleSort(array, N);
-    printArray(array, N);
 
-    compareLinearSearch(array, N, target);
-    compareBinarySearch(array, N, target); 
+	srand(time(0));
+	makeArray(array, N);
 
-    }
-
-int linearSearch(int array[], int N, int target)
-{
-    int comp;
-    for (int i = 0; i < N; i++){
-        comp++;
-        if (array[i] == target){
-            return comp;
-        }
-    }
-    return comp;
-}
-
-int compareLinearSearch(int array[], int N, int target)
-{
-    const int TRIES = 10;
-    int compNumber;
-        for(int trynumber = 0; trynumber<TRIES; trynumber++)
-        {
-        target = array[rand() % N ]; 
-        compNumber += linearSearch(array, N, target);
-        cout << "Comparisons executed: " << compNumber << endl;
-        }
-        cout << "Average: " << compNumber / TRIES << endl;
-}
-
-int compareBinarySearch(int array[], int N, int target)
-{
-    const int TRIES = 10;
-    int compNumber;
-    for(int trynumber = 0; trynumber<TRIES; trynumber++)
-        {
-        target = array[rand() % N ]; 
-        compNumber += binarySearch(array, N, target);
-        cout << "Comparisons executed: " << compNumber << endl;
-        }
-        cout << "Average: " << compNumber / TRIES << endl;
-}
-
-int binarySearch(int array[], int N, int target)
-{
- int first, last, mid, comp;
-
-    first = comp = 0;
-    last = N - 1;
-
-    while(first <= last)
+	for (int i = 0; i < TRIES; i++)
     {
-        mid = (first + last) / 2;
-        comp++;
-
-        if (target == array[mid])
-        {
-			return comp;
-            
-        }
-        else if (target < array[mid])
-        {
-            last = mid - 1;
-        }
-        else
-        {
-            first = mid + 1;
-        }
+        target = array[rand() % N];
+        total_linear += linearSearch(array, N, target);
     }
-    return comp;
+
+	bubbleSort(array, N);
+	printArray(array, N);
+	for(int trynumber=0; trynumber<TRIES; trynumber++)
+	{
+		target = array[ rand() % N ];
+		total_binary += binarySearch(array, N, target);
+	}
+	
+    cout << "The average comparision numbers of Linear Search is " << total_linear / TRIES << endl;
+
+    cout << "The average comparision numbers of binary Search is " << total_binary / TRIES << endl;
+
+
 }
-
-void bubbleSort(int array[], int N)
-{
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N - i - 1; j++)
-        {
-            if (array[j] > array[j + 1])
-                swap(array[j], array[j + 1]);
-        }
-    }
-}
-
-
-
 void makeArray(int array[], int N)
 {
-    for(int i = 0; i <N; i++)
-        array[i] = rand() % 10 + 1;
-}
+		for(int i=0; i<N; i++)
+			array[i] = rand() % (100) + 1; 
 
+}
 void printArray(int array[], int N)
 {
     for (int i = 0; i < N; i++)
@@ -125,4 +56,46 @@ void printArray(int array[], int N)
         if (i % 8 == 7)
             cout << endl;
     }
+}
+void bubbleSort(int array[], int N)
+{
+    for (int i = 0; i < N - 1; i++)
+    {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+                swap(array[j], array[j + 1]);
+        }
+    }
+}
+int binarySearch(int array[], int N, int target)
+{
+	int first, last, mid, comp;
+
+	first = comp = 0;
+	last = N-1;
+
+	while(  first <= last )
+	{
+		mid = (first + last ) / 2;
+		comp++;
+		if ( target == array[mid])
+		{
+			return comp;
+		}
+		else if ( target < array[mid]) 
+			last = mid - 1;
+		else 
+		 	first = mid + 1;
+	}
+	return comp;
+}
+
+
+int linearSearch(int array[], int N, int target)
+{
+    for (int i = 0; i < N; i++)
+        if (array[i] == target)
+            return i + 1;
+    return 0;
 }
