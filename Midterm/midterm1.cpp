@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Student  
+class Student  //student class
 {
   private:   
     int SID;
