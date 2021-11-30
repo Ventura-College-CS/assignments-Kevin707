@@ -72,19 +72,19 @@ int main()
   
   
   double *scores1 = new double[5]{72.5, 38.6, 22.8, 34.5, 55.7};
-  Student s1(1, "Akon", scores1, 5);
+  Student s1(1, "Akon", scores1, 4);
   
   double *scores2 = new double[5]{82.5, 42.7, 85.8, 64, 75};
-  Student s2(2, "Evan", scores2, 5);
+  Student s2(2, "Evan", scores2, 2);
   
   double *scores3 = new double[5]{80, 48, 45.8, 55, 44.5};
-  Student s3(3, "John", scores3, 5);
+  Student s3(3, "John", scores3, 1);
   
   double *scores4 = new double[5]{51.5, 92.5, 83, 48.5, 66.7};
-  Student s4(4, "Arya", scores4, 5);
+  Student s4(4, "Arya", scores4, 8);
   
   double *scores5 = new double[5]{57, 98.6, 42.8, 100, 95.2};
-  Student s5(5, "Sans", scores5, 5);
+  Student s5(5, "Sans", scores5, 6);
  
   pq.push(s1);
   pq.push(s2);
