@@ -1,97 +1,53 @@
 #include <iostream>
-#include <vector>
-
+#include "midterm1.tpp"
 using namespace std;
 
-class Student  
-{
-  private:   
-    int SID;
-    string SName;
-    double *scores;
-
-  public:  
-    Student()
-    {
-      SID = 0;
-      SName = "";
-      scores = nullptr;
-    }
-        
-    Student(int i, string name, double *sc)  
-    {
-      SID = i;
-      SName = name;
-      scores = sc;
-    }
-
-    int getID(){return SID;}  
-    string getName(){return SName;}
-    double *getScores(){return scores;}
-};
-
-template <class T>  
-class Stack
-{
-  private:  
-    vector<T>pool;
-
-  public:
-    Stack()  
-    {
-    }
-
-    void push(const T &el)  
-    {
-      pool.push_back(el);
-    }
-
-    T pop()  
-    {
-      T res = pool[pool.size() - 1];
-      pool.pop_back();
-      return res;
-    }
-
-    T topEl()  
-    {
-      return pool[pool.size() - 1];
-    }
-
-    bool isEmpty()  
-    {
-      return pool.size() == 0;
-    }
-
-    int size(){return pool.size();}  
-};
 
 int main()
 {
-  
-  Student s1(100, "John", new double[3]{10, 20, 30});
-  Student s2(101, "Mike", new double[3]{10.2, 20.2, 30.2});
-  Student s3(102, "Evan", new double[3]{1, 2, 3});
-  Student s4(103, "Jake", new double[3]{20, 80, 90});
-  Student s5(104, "Carl", new double[3]{30, 40, 320});
 
-  Stack<Student>st;
+    Stack<Student, 5>p;
 
- 
-  st.push(s1);   
-  st.push(s2);
-  st.push(s3);
-  st.push(s4);
-  st.push(s5);
+    Student s1, s2, s3, s4, s5;
 
-  cout << "Size: " << st.size() << endl; 
+	s1.setSid(10000001);
+	s1.setSname("Jacob");
+	s1.setScore(100, 100, 100);
+	s1.printStudent();
 
-  while(!st.isEmpty()) 
-  {
-    Student res = st.pop();  
-    cout << "SID: " << res.getID() << " , SName: " << res.getName() << " , scores: ";
-    cout << res.getScores()[0] << ", " << res.getScores()[1] << " , " << res.getScores()[2] << endl;
-  }
+	s2.setSid(10000002);
+	s2.setSname("Savannah");
+	s2.setScore(100, 90, 100);
+	s2.printStudent();
 
-  return 0;
+	s3.setSid(10000003);
+	s3.setSname("Sophie");
+	s3.setScore(100, 90, 50);
+	s3.printStudent();
+
+    s4.setSid(10000004);
+	s4.setSname("Nomar");
+	s4.setScore(100, 100, 95);
+	s4.printStudent();
+	
+	s5.setSid(10000005);
+	s5.setSname("Kevin");
+	s5.setScore(20, 10, 40);
+	s5.printStudent();
+
+    p.size();
+
+    p.push(s1);
+	p.push(s2);
+	p.push(s3);
+    p.push(s4);
+    p.push(s5);
+
+	Student ret;
+    while(p.isEmpty())
+	{
+		ret = p.pop();
+        cout << ret.getID() << endl;
+	}
+
 }

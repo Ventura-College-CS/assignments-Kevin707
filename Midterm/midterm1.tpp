@@ -1,8 +1,11 @@
+#ifndef STACK_H
+#define STACK_H
 #include <iostream>
-#include <queue>
+#include <vector>
 using namespace std;
 
-const int NUM_SCORES = 3;
+const int NUM_SCORES = 2;
+
 class Student
 {
 
@@ -46,68 +49,40 @@ class Student
 
 };
 
-class StudentCompare
+template <class T, int capacity=3>
+class Stack
 {
 
+    private:
+        vector<T> p;
+    
     public:
-		int operator()(const Student &lhs, const Student &rhs)
-		{
-			double 	lhssum = 0.0, rhssum = 0.0;
-			vector<double> score;
-			score = lhs.getScore();
-			for(int i=0; i<score.size(); i++)
-				lhssum += score[i];
-			score = rhs.getScore();
-			for(int i=0; i<score.size(); i++)
-				rhssum += score[i];
-			return lhssum < rhssum ;
-		}
-
+        void stack(int size)
+        {
+            p.reserve(size);
+        }
+        void push(T el)
+        {
+            p.push_back(el);
+        }
+        T pop()
+        {
+            T val = p.back();
+            p.pop_back();
+            return val;
+        }
+        T &topEl()
+        {
+            return p.back();
+        }
+        int isEmpty()
+        {
+            return p.empty();
+        }
+        int size()
+        {
+            return p.size();
+        }
 };
 
-int main()
-{
-	Student s1, s2, s3, s4, s5;
-	Student pop_student;
-
-	s1.setSid(10000001);
-	s1.setSname("Jacob");
-	s1.setScore(100, 100, 100);
-	s1.printStudent();
-
-	s2.setSid(10000002);
-	s2.setSname("Savannah");
-	s2.setScore(100, 90, 100);
-	s2.printStudent();
-
-	s3.setSid(10000003);
-	s3.setSname("Sophie");
-	s3.setScore(100, 90, 50);
-	s3.printStudent();
-
-    s4.setSid(10000004);
-	s4.setSname("Nomar");
-	s4.setScore(100, 100, 95);
-	s4.printStudent();
-	
-	s5.setSid(10000005);
-	s5.setSname("Kevin");
-	s5.setScore(20, 10, 40);
-	s5.printStudent();
-
-	priority_queue<Student, vector<Student>, StudentCompare> pq;
-   
-	pq.push(s1);
-	pq.push(s2);
-	pq.push(s3);
-    pq.push(s4);
-    pq.push(s5);
-
-	while (!pq.empty())
-	{
-		pop_student = pq.top();
-		pop_student.printStudent();
-		pq.pop();
-	}
-
-}
+#endif
