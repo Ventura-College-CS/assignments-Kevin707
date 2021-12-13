@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Final1.hpp"
+#include "final1.hpp"
 #include <fstream>
 using namespace std;
 
@@ -23,7 +23,7 @@ int main()
 {
         int target;
         ifstream ifs;
-        ifs.open("class.txt");
+        ifs.open("Finalclass.txt");
 	if ( ifs.fail())
 	{
 		cerr << "File Open Error\n";
